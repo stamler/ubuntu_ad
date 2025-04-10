@@ -123,6 +123,17 @@ if ! grep -q "pam_mkhomedir.so" /etc/pam.d/common-session; then
     echo "session required pam_mkhomedir.so skel=/etc/skel umask=0022" >> /etc/pam.d/common-session
 fi
 
+# Configure LightDM to allow manual login (typing username)
+LIGHTDM_CONF_DIR="/etc/lightdm/lightdm.conf.d"
+LIGHTDM_MANUAL_LOGIN_CONF="$LIGHTDM_CONF_DIR/90-allow-manual-login.conf"
+
+mkdir -p "$LIGHTDM_CONF_DIR"
+cat > "$LIGHTDM_MANUAL_LOGIN_CONF" <<EOF
+[Seat:*]
+greeter-show-manual-login=true
+greeter-hide-users=true
+EOF
+
 echo "======================================================"
 echo "Setup Complete!"
 echo "Your machine is now joined to the AD domain '$DOMAIN_NAME'."
@@ -135,3 +146,5 @@ echo "   (Replace //server/sharename and /mnt/sharename with your server/share a
 echo "----------------------------------------------"
 echo "Now, domain users logging into this machine should be able to mount network shares"
 echo "without needing to enter their credentials again, just like on Windows."
+echo "----------------------------------------------"
+echo "A REBOOT IS REQUIRED for login screen changes to take effect."
