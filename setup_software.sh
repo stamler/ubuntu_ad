@@ -1,4 +1,5 @@
 #!/bin/bash
+apt remove thunderbird
 apt install -y evolution evolution-ews
 
 # Configure Evolution to use Microsoft Exchange as follows:
