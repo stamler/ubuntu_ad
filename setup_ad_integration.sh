@@ -59,13 +59,10 @@ REALM_NAME=$(realm discover $DOMAIN_NAME | grep 'realm-name' | awk '{print $2}')
 # NOTE: The user provided here must have sufficient permissions to join the domain.
 # Note uppercase suffix
 read -p "Enter your AD admin username (e.g., admin@$REALM_NAME): " AD_USER
-echo "Enter the password for $AD_USER:"
-read -s AD_PASS
-echo ""
 
 # Join the domain.
 # Note: Depending on your environment, you might be prompted again for the password.
-echo "$AD_PASS" | realm join --user="$AD_USER" $DOMAIN_NAME
+realm join --user="$AD_USER" $DOMAIN_NAME
 
 # Verify if the domain join was successful.
 if [ $? -ne 0 ]; then
