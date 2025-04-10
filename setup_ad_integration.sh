@@ -35,7 +35,7 @@ apt update && apt upgrade -y
 # - cifs-utils: for mounting Windows SMB (CIFS) shares.
 # - krb5-user: for Kerberos authentication.
 apt install -y realmd sssd sssd-tools libnss-sss libpam-sss adcli \
-  samba-common-bin oddjob oddjob-mkhomedir packagekit cifs-utils krb5-user
+  samba-common-bin oddjob oddjob-mkhomedir packagekit cifs-utils
 
 # rename the computer
 SERIAL_NUMBER=$(dmidecode -s system-serial-number)
