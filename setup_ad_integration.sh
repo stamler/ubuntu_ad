@@ -39,7 +39,13 @@ apt install -y realmd sssd sssd-tools libnss-sss libpam-sss adcli \
 
 # rename the computer
 SERIAL_NUMBER=$(dmidecode -s system-serial-number)
-NEW_HOSTNAME="linux-${SERIAL_NUMBER}"
+CHASSIS_TYPE=$(dmidecode -s chassis-type)
+# if SERIAL_NUMBER is 'Not Specified', then use a random 8 character string, otherwise prepend with linux-
+if [[ $SERIAL_NUMBER == "Not Specified" ]]; then
+    NEW_HOSTNAME="$CHASSIS_TYPE-$(openssl rand -hex 4)"
+else
+    NEW_HOSTNAME="$CHASSIS_TYPE-${SERIAL_NUMBER}"
+fi
 hostnamectl set-hostname "$NEW_HOSTNAME"
 sed -i "s/127.0.1.1.*/127.0.1.1 $NEW_HOSTNAME/" /etc/hosts
 
