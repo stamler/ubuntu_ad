@@ -6,8 +6,6 @@ Download the domain join script and make it executable
 
 ```
 curl -sLo setup_ad_integration.sh https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_ad_integration.sh
-
-# Make the script executable.
 chmod +x setup_ad_integration.sh
 ```
 
