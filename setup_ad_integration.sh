@@ -13,10 +13,14 @@
 #   sudo ./setup_ad_integration.sh
 # =============================================================================
 
-DOMAIN_NAME="main.tbte.ca"
-
 # Exit immediately if a command exits with a non-zero status.
 set -e
+
+# Get the domain name from the user input
+read -p "Enter the domain name: " DOMAIN_NAME
+
+# Prompt for AD admin credentials
+read -p "Enter your AD admin username without domain (e.g., admin): " AD_USER
 
 # Check if running as root.
 if [[ $EUID -ne 0 ]]; then
@@ -33,7 +37,6 @@ apt update && apt upgrade -y
 # - oddjob & oddjob-mkhomedir: for home directory creation on login.
 # - packagekit: required for some domain join processes.
 # - cifs-utils: for mounting Windows SMB (CIFS) shares.
-# - krb5-user: for Kerberos authentication.
 apt install -y realmd sssd sssd-tools libnss-sss libpam-sss adcli \
   samba-common-bin oddjob oddjob-mkhomedir packagekit cifs-utils
 
@@ -55,14 +58,9 @@ realm discover $DOMAIN_NAME
 # Extract realm-name from realm discover output
 REALM_NAME=$(realm discover $DOMAIN_NAME | grep 'realm-name' | awk '{print $2}')
 
-# Prompt for AD admin credentials
-# NOTE: The user provided here must have sufficient permissions to join the domain.
-# Note uppercase suffix
-read -p "Enter your AD admin username (e.g., admin@$REALM_NAME): " AD_USER
-
 # Join the domain.
 # Note: Depending on your environment, you might be prompted again for the password.
-realm join --user="$AD_USER" $DOMAIN_NAME
+realm join --user="$AD_USER@$REALM_NAME" $DOMAIN_NAME
 
 # Verify if the domain join was successful.
 if [ $? -ne 0 ]; then
