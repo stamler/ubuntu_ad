@@ -1,11 +1,10 @@
 #!/bin/bash
 # =============================================================================
 # Script Name: setup_ad_integration.sh
-# Description: This script updates a fresh Linux Mint install, installs
-#              necessary dependencies, joins an Active Directory domain,
-#              and configures the system so that domain users can mount SMB
-#              shares using Kerberos authentication (sec=krb5) without needing
-#              to enter their credentials again.
+# Description: This script updates a fresh Linux Mint install, joins an Active
+#              Directory domain, and configures the system so that domain users
+#              can mount SMB shares using Kerberos authentication (sec=krb5)
+#              without needing to enter their credentials again.
 #
 # Requirements: Must be run as root.
 #
@@ -28,17 +27,6 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 apt update && apt upgrade -y
-
-# Install necessary packages:
-# - realmd: for discovering and joining domains.
-# - sssd, sssd-tools, libnss-sss, libpam-sss: for integrating Linux login with AD.
-# - adcli: for AD domain join.
-# - samba-common-bin: for Samba-related utilities.
-# - oddjob & oddjob-mkhomedir: for home directory creation on login.
-# - packagekit: required for some domain join processes.
-# - cifs-utils: for mounting Windows SMB (CIFS) shares.
-apt install -y realmd sssd sssd-tools libnss-sss libpam-sss adcli \
-  samba-common-bin oddjob oddjob-mkhomedir packagekit cifs-utils
 
 # rename the computer
 SERIAL_NUMBER=$(dmidecode -s system-serial-number)
