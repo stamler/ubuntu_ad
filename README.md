@@ -9,7 +9,8 @@ This machine should be running Linux Mint or Ubuntu on a btrfs filesystem with T
 If this machine has Timeshift enabled on btrfs and was previously setup, restore the snapshot first. If you haven't already done so, now is the time to remove the machine from Active Directory as well. After restoring the snapshot, delete any old user directories from the `/home` directory.
 
 ```
-timeshift --restore --snapshot '<SNAPSHOT_ID>'
+timeshift --list
+timeshift --restore --snapshot '<Name>'
 ```
 
 ## 2. Setup the software
