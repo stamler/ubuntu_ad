@@ -21,6 +21,7 @@ read -p "Enter the domain name: " DOMAIN_NAME
 
 # Prompt for AD admin credentials
 read -p "Enter your AD admin username without domain (e.g., admin): " AD_USER
+read -s -p "Enter your AD admin password: " AD_PASSWORD
 
 # Check if running as root.
 if [[ $EUID -ne 0 ]]; then
@@ -60,7 +61,7 @@ REALM_NAME=$(realm discover $DOMAIN_NAME | grep 'realm-name' | awk '{print $2}')
 
 # Join the domain.
 # Note: Depending on your environment, you might be prompted again for the password.
-realm join --user="$AD_USER@$REALM_NAME" $DOMAIN_NAME
+echo $AD_PASSWORD | realm join --user="$AD_USER@$REALM_NAME" $DOMAIN_NAME
 
 # Verify if the domain join was successful.
 if [ $? -ne 0 ]; then
