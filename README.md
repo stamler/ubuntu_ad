@@ -9,7 +9,7 @@ curl -sLo setup_ad_integration.sh https://raw.githubusercontent.com/stamler/ubun
 chmod +x setup_ad_integration.sh
 ```
 
-Run the script
+Run the script. You'll be prompted for the domain name (FQDN) and the username (without domain) at the beginning of the script. Later on during domain join you'll be prompted for the password of the account with domain admin privileges.
 ```
 sudo ./setup_ad_integration.sh
 ```
