@@ -2,16 +2,18 @@
 
 ## Join the domain
 
-From an elevated command prompt (`sudo su -`) run the following commands:
+Download the domain join script and make it executable
+
 ```
-# Download the script locally. This is required because the script is interactive.
 curl -sLo setup_ad_integration.sh https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_ad_integration.sh
 
 # Make the script executable.
 chmod +x setup_ad_integration.sh
+```
 
-# Run the script.
-./setup_ad_integration.sh
+Run the script
+```
+sudo ./setup_ad_integration.sh
 ```
 
 ## Setup the Software
