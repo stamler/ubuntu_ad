@@ -10,7 +10,6 @@ apt install -y evolution evolution-ews tailscale xrdp xorgxrdp
 
 # Enable xrdp
 systemctl enable xrdp
-systemctl status xrdp
 
 # remove software
 apt remove thunderbird
