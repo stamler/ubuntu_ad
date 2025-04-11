@@ -8,14 +8,14 @@ This machine should be running Linux Mint or Ubuntu on a btrfs filesystem with T
 
 If this machine has Timeshift enabled on btrfs and was previously setup, restore the snapshot first. If you haven't already done so, now is the time to remove the machine from Active Directory as well. After restore delete any old user directories from the `/home` directory.
 
-## 2. Setup the Software
+## 2. Setup the software
 
 Run the following command to install the software. If you're not running as root you will be prompted for your password. This will install the current software suite, remove software that's not specified, and run updates.
 ```
 curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_software.sh | sudo bash
 ```
 
-## 3. Snapshot create/rotate
+## 3. Create or update snapshot
 
 Create a Timeshift shapshot. This will be the new restore state the next time you need to restore the machine. If this is machine that came back from the field and has previously been joined to the domain, delete the old snapshot after creating a new one.
 
@@ -33,7 +33,7 @@ Run the script. You'll be prompted for the domain name (FQDN) and the username (
 sudo ./setup_ad_integration.sh
 ```
 
-## 5. Setup the Shares
+## 5. Setup the shares
 
 Run the following command to setup the shares. If you're not running as root you will be prompted for your password.
 ```
