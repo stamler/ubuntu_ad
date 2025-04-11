@@ -43,6 +43,11 @@ apt install -y realmd sssd sssd-tools libnss-sss libpam-sss adcli \
 # rename the computer
 SERIAL_NUMBER=$(dmidecode -s system-serial-number)
 CHASSIS_TYPE=$(dmidecode -s chassis-type)
+
+# Clamp CHASSIS_TYPE to a maximum length of 3 characters and make it all uppercase
+CHASSIS_TYPE=${CHASSIS_TYPE:0:3}
+CHASSIS_TYPE=${CHASSIS_TYPE^^}
+
 # if SERIAL_NUMBER is 'Not Specified', then use a random 8 character string, otherwise prepend with linux-
 if [[ $SERIAL_NUMBER == "Not Specified" ]]; then
     NEW_HOSTNAME="$CHASSIS_TYPE-$(openssl rand -hex 4)"
