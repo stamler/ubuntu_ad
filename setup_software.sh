@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# update and upgrade packages
+apt update && apt upgrade -y
+
 # Install necessary packages for AD integration
 # - realmd: for discovering and joining domains.
 # - sssd, sssd-tools, libnss-sss, libpam-sss: for integrating Linux login with AD.
