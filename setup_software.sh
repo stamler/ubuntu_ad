@@ -5,8 +5,21 @@ curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.noarmor.gpg | sudo tee
 curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
 apt update
 
+# remove software
 apt remove thunderbird
-apt install -y evolution evolution-ews tailscale
+
+# install software
+apt install -y evolution evolution-ews tailscale xrdp xorgxrdp
+
+# Enable xrdp
+systemctl enable xrdp
+systemctl status xrdp
+
+# Users who wish to connect via RDP must configure cinnamon
+# NOTE: AD users will *not* be able to RDP by default https://c-nergy.be/blog/?p=16274
+# echo "cinnamon-session" > ~/.xsession
+# chmod +x ~/.xsession
+# sudo systemctl restart xrdp
 
 # Configure Evolution to use Microsoft Exchange as follows:
 # Open Evolution and go to Edit -> Preferences -> Mail Accounts -> Add
