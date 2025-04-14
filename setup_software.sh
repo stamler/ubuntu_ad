@@ -22,6 +22,8 @@ apt update
 # install other software
 apt install -y evolution evolution-ews tailscale xrdp xorgxrdp pdfarranger librecad
 
+# If the user wants to use FreeCAD, they can download the AppImage themselves.
+
 # Enable xrdp
 systemctl enable xrdp
 
