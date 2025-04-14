@@ -48,7 +48,7 @@ umount ${TARGET}* 2>/dev/null || true
 # NVMe devices use a 'p' in the partition names (e.g., /dev/nvme0n1p1).
 if [[ "$TARGET" =~ nvme ]]; then
     EFI_PART="${TARGET}p1"
-    LINUX_PART="${TARGET}p2"b`
+    LINUX_PART="${TARGET}p2"
 else
     EFI_PART="${TARGET}1"
     LINUX_PART="${TARGET}2"
