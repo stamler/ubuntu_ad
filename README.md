@@ -5,7 +5,9 @@
 This machine should be running Linux Mint or Ubuntu on a btrfs filesystem with Timeshift enabled. If it is not, first partition the disk.
 
 ```
-curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_partitions.sh | sudo bash
+curl -sLo setup_partitions.sh https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_partitions.sh
+chmod +x setup_partitions.sh
+./setup_partitions.sh
 ```
 
 Then install Linux on the btrfs partition.
