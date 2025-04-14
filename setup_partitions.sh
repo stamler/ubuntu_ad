@@ -1,31 +1,40 @@
 #!/bin/bash
 # partition-mint.sh
 #
-# This script erases an entire disk, creates a GPT partition table with:
+# This script enumerates available disks with human‑readable details and prompts the user
+# to select a disk. It then erases the disk, creates a GPT partition table, and partitions as follows:
 #   - A 512 MiB EFI system partition formatted as FAT32 and labeled "ESP"
 #     with boot and esp flags.
 #   - A second partition spanning the rest of the disk intended for Linux Mint.
 #
-# Usage: sudo ./partition-mint.sh /dev/sdX
-# (Replace /dev/sdX with the target device such as /dev/sda or /dev/nvme0n1)
+# Usage: sudo ./partition-mint-enhanced.sh
 
 set -euo pipefail
 
 # Check that the script is being run as root
 if [ "$EUID" -ne 0 ]; then
-    echo "This script must be run as root. Try 'sudo $0 /dev/sdX'"
+    echo "This script must be run as root. Try 'sudo $0'."
     exit 1
 fi
 
-# Check that exactly one argument (the target disk) is provided
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 /dev/sdX"
+# List available block devices with human‑readable details
+# Using lsblk to list only physical disks (ignoring loop devices)
+echo "Available disks:"
+lsblk -dpno NAME,SIZE,MODEL | grep -v "loop"
+echo ""
+
+# Prompt the user to enter the full device name (e.g., /dev/sda or /dev/nvme0n1)
+read -rp "Enter the full device name to use (e.g., /dev/sda): " TARGET
+
+# Validate that the input is a valid block device
+if [[ ! -b "$TARGET" ]]; then
+    echo "Error: $TARGET is not a valid block device."
     exit 1
 fi
 
-TARGET="$1"
-
-echo "WARNING: This will completely erase all data on $TARGET!"
+# Confirm with the user before proceeding
+echo ""
+echo "WARNING: This will completely erase all data on $TARGET."
 read -rp "Are you sure you want to continue? [y/N]: " confirm
 if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
     echo "Aborting partitioning."
@@ -35,10 +44,11 @@ fi
 # Unmount any mounted partitions on the target disk (ignore errors)
 umount ${TARGET}* 2>/dev/null || true
 
-# Detect if the disk name is for an NVMe device where partitions are named with a 'p' (e.g. /dev/nvme0n1p1)
+# Determine partition names based on device type.
+# NVMe devices use a 'p' in the partition names (e.g., /dev/nvme0n1p1).
 if [[ "$TARGET" =~ nvme ]]; then
     EFI_PART="${TARGET}p1"
-    LINUX_PART="${TARGET}p2"
+    LINUX_PART="${TARGET}p2"b`
 else
     EFI_PART="${TARGET}1"
     LINUX_PART="${TARGET}2"

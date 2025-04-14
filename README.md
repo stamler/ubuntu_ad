@@ -2,11 +2,17 @@
 
 ## 0. Prerequisites
 
-This machine should be running Linux Mint or Ubuntu on a btrfs filesystem with Timeshift enabled.
+This machine should be running Linux Mint or Ubuntu on a btrfs filesystem with Timeshift enabled. If it is not, first partition the disk.
+
+```
+curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_partitions.sh | sudo bash
+```
+
+Then install Linux on the btrfs partition.
 
 ## 1. Restore an existing snapshot
 
-If this machine has Timeshift enabled on btrfs and was previously setup, restore the snapshot first. If you haven't already done so, now is the time to remove the machine from Active Directory as well. After restoring the snapshot, delete any old user directories from the `/home` directory.
+Skip this step if you just installed linux in step 0. Otherwise, if this machine has Timeshift enabled on btrfs and was previously setup, restore the snapshot first. If you haven't already done so, now is the time to remove the machine from Active Directory as well. After restoring the snapshot, delete any old user directories from the `/home` directory.
 
 ```
 timeshift --list
