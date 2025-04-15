@@ -20,7 +20,7 @@ curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.tailscale-keyring.list
 apt update
 
 # install other software
-apt install -y evolution evolution-ews tailscale xrdp xorgxrdp pdfarranger librecad
+apt install -y evolution evolution-ews tailscale xrdp xorgxrdp pdfarranger librecad openssh-server
 
 # If the user wants to use FreeCAD, they can download the AppImage themselves.
 
