@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# TODO: factor out the list of shares into a separate file that is
+# updated from a public URL after every reboot so that the mounted
+# shares are automatically updated when the list changes.
+
 HELPER_SCRIPT_PATH="/usr/local/bin/mount-domain-shares.sh"
 AUTOSTART_FILE_PATH="/etc/xdg/autostart/mount-domain-shares.desktop"
 
