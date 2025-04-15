@@ -10,7 +10,11 @@ chmod +x setup_partitions.sh
 ./setup_partitions.sh
 ```
 
-Then install Linux on the btrfs partition.
+Then install Linux on the btrfs partition. Finally enable timeshift in btrfs.
+
+```
+sudo timeshift --btrfs
+```
 
 ## 1. Restore an existing snapshot
 
