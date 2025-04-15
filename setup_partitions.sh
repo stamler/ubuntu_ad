@@ -75,4 +75,4 @@ mkfs.fat -F32 -n ESP "$EFI_PART"
 
 echo "EFI partition formatted."
 echo "NOTE: The Linux Mint partition ($LINUX_PART) has been created but not formatted."
-echo "You can now use the Linux Mint installer, selecting 'Something else' when prompted, to format the second partition as Btrfs and set it as the root mount (/)."
+echo "You can now use the Linux Mint installer, selecting 'Manual' (LMDE) or 'Something else' (Mint) when prompted, to format the second partition as Btrfs and set it as the root mount (/)."
