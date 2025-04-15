@@ -37,7 +37,7 @@ curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/set
 Create a Timeshift shapshot. This will be the new restore state the next time you need to restore the machine. If this is machine that came back from the field and has previously been joined to the domain, delete the old snapshot after creating a new one.
 
 ```
-timeshift --create --comments "Fresh update before joining domain" --tags O
+timeshift --create --comments "Fresh update before joining domain"
 ```
 
 ## 4. Join the domain
