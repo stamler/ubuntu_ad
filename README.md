@@ -21,8 +21,8 @@ sudo timeshift --btrfs
 Skip this step if you just installed linux in step 0. Otherwise, if this machine has Timeshift enabled on btrfs and was previously setup, restore the snapshot first. If you haven't already done so, now is the time to remove the machine from Active Directory as well. After restoring the snapshot, delete any old user directories from the `/home` directory.
 
 ```
-timeshift --list
-timeshift --restore --snapshot '<Name>'
+sudo timeshift --list
+sudo timeshift --restore --snapshot '<Name>'
 ```
 
 ## 2. Setup the software
@@ -37,7 +37,7 @@ curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/set
 Create a Timeshift shapshot. This will be the new restore state the next time you need to restore the machine. If this is machine that came back from the field and has previously been joined to the domain, delete the old snapshot after creating a new one.
 
 ```
-timeshift --create --comments "Fresh update before joining domain"
+sudo timeshift --create --comments "Fresh update before joining domain"
 ```
 
 ## 4. Join the domain
