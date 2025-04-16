@@ -60,3 +60,10 @@ Run the following command to setup the shares. If you're not running as root you
 ```
 curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_shares.sh | sudo bash
 ```
+
+## 6. Setup the printers
+
+Run the following command to setup the printers. If you're not running as root you will be prompted for your password.
+```
+curl -sL https://raw.githubusercontent.com/stamler/ubuntu_ad/refs/heads/main/setup_printers.sh | sudo bash
+```
